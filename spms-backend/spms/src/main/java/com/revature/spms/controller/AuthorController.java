@@ -26,6 +26,10 @@ public class AuthorController {
 	public List<Author> getAllAuthors(){
 		return this.service.getAllAuthors();
 	}
+	@GetMapping("/get/{id}")
+	public Author getAuthorById(@PathVariable long id){
+		return this.service.getAuthorById(id);
+	}
 	
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)	

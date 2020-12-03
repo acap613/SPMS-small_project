@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.revature.spms.entity.Author;
 import com.revature.spms.repos.AuthorRepo;
- @Service
+
+@Service
 public class AuthorService {
 
 	@Autowired
@@ -16,6 +17,10 @@ public class AuthorService {
 	public List<Author> getAllAuthors() {
 		// TODO Auto-generated method stub
 		return this.authorRepo.findAll();
+	}
+	
+	public Author getAuthorById(long id) {
+		return this.authorRepo.findById(id).get();
 	}
 
 	public Author addAuthor(Author author) {
