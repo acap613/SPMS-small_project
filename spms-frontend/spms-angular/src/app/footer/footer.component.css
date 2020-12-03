@@ -1,0 +1,11 @@
+.container {
+    position: absolute;
+    background-color: rgb(116, 153, 116);
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; 
+    color: white;
+    text-align: center;
+    line-height: 2.5rem;
+
+}
