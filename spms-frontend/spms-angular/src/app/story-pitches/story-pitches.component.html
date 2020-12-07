@@ -1,0 +1,46 @@
+<div class="heading">
+    <h3>Hello, these are your story pitches</h3>
+
+</div>
+
+
+
+<div class="container">
+    <table class="table">    
+        <thead>
+            <tr>                
+                <th>Story Pitch</th>                
+                <th>Target Date</th>
+                <th>Word Count</th>
+                <th>Completed</th>
+                <th>Genre</th>
+                <th>Tag</th>
+                <th>Description</th>
+                <th>Approved</th>
+                <th>On Hold</th>
+                <th>edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pitch of pitches">
+               
+                <td>{{pitch.title}}</td>
+                <td>{{pitch.completion_date | date}}</td>
+                <td>{{pitch.word_count}}</td>
+                <td>{{pitch.completed}}</td>
+                <td>{{pitch.genre}}</td>
+                <td>{{pitch.tag}}</td>
+                <td>{{pitch.description}}</td>
+                <td>{{pitch.approved}}</td>
+                <td>{{pitch.on_hold}}</td>
+                <td><button (click)="updatePitch(pitch.id)" class="btn btn-success">Edit</button></td>
+                <td><button (click)="deletePitch(pitch.id)" class="btn btn-warning">Delete</button></td>
+            </tr>
+        </tbody>
+    </table><hr>
+    <div class="row">
+        <button (click)="addPitch()" class="btn btn-primary">Add New Item</button>
+    </div>
+</div>
+

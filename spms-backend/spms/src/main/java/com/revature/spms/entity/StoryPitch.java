@@ -40,16 +40,16 @@ public class StoryPitch {
 		
 	}
 
-	public StoryPitch(Long id, Long author_id, String title, Date completion_date, int word_count, String genre,
-			String tag, String description, char approved, char on_hold) {
+	public StoryPitch(Long book_id, Long author_id, String title, Date completion_date, int word_count, String genre,
+			String story_tag, String description, char approved, char on_hold) {
 		super();
-		this.book_id = id;
+		this.book_id = book_id;
 		this.author_id = author_id;
 		this.title = title;
 		this.completion_date = completion_date;
 		this.word_count = word_count;
 		this.genre = genre;
-		this.story_tag = tag;
+		this.story_tag = story_tag;
 		this.description = description;
 		this.approved = approved;
 		this.on_hold = on_hold;
@@ -59,8 +59,8 @@ public class StoryPitch {
 		return book_id;
 	}
 
-	public void setId(Long id) {
-		this.book_id = id;
+	public void setId(Long book_id) {
+		this.book_id = book_id;
 	}
 
 	public Long getAuthor_id() {
@@ -107,8 +107,8 @@ public class StoryPitch {
 		return story_tag;
 	}
 
-	public void setTag(String tag) {
-		this.story_tag = tag;
+	public void setTag(String story_tag) {
+		this.story_tag = story_tag;
 	}
 
 	public String getDescription() {
@@ -208,7 +208,7 @@ public class StoryPitch {
 	@Override
 	public String toString() {
 		return "StoryPitch [id=" + book_id + ", author_id=" + author_id + ", title=" + title + ", completion_date="
-				+ completion_date + ", word_count=" + word_count + ", genre=" + genre + ", tag=" + story_tag
+				+ completion_date + ", word_count=" + word_count + ", genre=" + genre + ", story_tag=" + story_tag
 				+ ", description=" + description + ", approved=" + approved + ", on_hold=" + on_hold + "]";
 	}
 	

@@ -1,11 +1,16 @@
-.container {
+footer {
+    
+    text-align: center;
     position: absolute;
-    background-color: rgb(116, 153, 116);
     bottom: 0;
     width: 100%;
-    height: 2.5rem; 
-    color: white;
-    text-align: center;
-    line-height: 2.5rem;
+    height: 40px;
+    background-color: rgb(44, 44, 44);
+    
+    
+}
 
+.text {
+    
+    color: rgb(158, 158, 158);
 }

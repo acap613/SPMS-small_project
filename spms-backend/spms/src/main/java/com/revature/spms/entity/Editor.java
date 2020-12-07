@@ -1,10 +1,15 @@
 package com.revature.spms.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +18,7 @@ public class Editor {
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private Long editor_id;
 	
 	@Column(name="first_name")
 	private String first_name;
@@ -33,7 +38,9 @@ public class Editor {
 	@Column(name="is_general")
 	private char is_general;
 	
-	
+	@Column(name="genres")
+	@OneToMany(targetEntity=Genre.class, mappedBy="genre")
+	public List<Genre> genres;
 	
 	public Editor() {
 		
@@ -42,7 +49,7 @@ public class Editor {
 	public Editor(Long id, String first_name, String last_name, int points_allowed, char is_assistant, char is_senior,
 			char is_general) {
 		super();
-		this.id = id;
+		this.editor_id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.points_allowed = points_allowed;
@@ -52,11 +59,11 @@ public class Editor {
 	}
 
 	public Long getId() {
-		return id;
+		return editor_id;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.editor_id = id;
 	}
 
 	public String getFirst_name() {
@@ -105,21 +112,24 @@ public class Editor {
 
 	public void setIs_general(char is_general) {
 		this.is_general = is_general;
+	}	
+	
+	public List<Genre> getGenres() {
+		return genres;
 	}
 
-	@Override
-	public String toString() {
-		return "Editor [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", points_allowed="
-				+ points_allowed + ", is_assistant=" + is_assistant + ", is_senior=" + is_senior + ", is_general="
-				+ is_general + "]";
+	
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((editor_id == null) ? 0 : editor_id.hashCode());
 		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((genres == null) ? 0 : genres.hashCode());
 		result = prime * result + is_assistant;
 		result = prime * result + is_general;
 		result = prime * result + is_senior;
@@ -137,15 +147,20 @@ public class Editor {
 		if (getClass() != obj.getClass())
 			return false;
 		Editor other = (Editor) obj;
+		if (editor_id == null) {
+			if (other.editor_id != null)
+				return false;
+		} else if (!editor_id.equals(other.editor_id))
+			return false;
 		if (first_name == null) {
 			if (other.first_name != null)
 				return false;
 		} else if (!first_name.equals(other.first_name))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (genres == null) {
+			if (other.genres != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!genres.equals(other.genres))
 			return false;
 		if (is_assistant != other.is_assistant)
 			return false;
@@ -162,6 +177,15 @@ public class Editor {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Editor [editor_id=" + editor_id + ", first_name=" + first_name + ", last_name=" + last_name
+				+ ", points_allowed=" + points_allowed + ", is_assistant=" + is_assistant + ", is_senior=" + is_senior
+				+ ", is_general=" + is_general + ", genres=" + genres + "]";
+	}
+
+	
 
 	
 	

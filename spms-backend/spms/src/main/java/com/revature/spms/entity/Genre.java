@@ -5,15 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+@Entity
+@Table(name="genre")
 public class Genre {
 
 	// fields
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		private Long id; // points to story pitch
-		@Column
+		private Long genre_id; // points to story pitch
+		@Column(name="genre")
 		private String genre;
 		
 		public Genre() {
@@ -22,18 +25,20 @@ public class Genre {
 		
 		public Genre(Long id, String genre) {
 			super();
-			this.id = id;
+			this.genre_id = id;
 			this.genre = genre;
 		}
 		public Long getId() {
-			return id;
+			return genre_id;
 		}
 		public void setId(Long id) {
-			this.id = id;
+			this.genre_id = id;
 		}
 		public String getGenre() {
 			return genre;
 		}
+		@ManyToOne
+		@JoinColumn(name="editor_id")
 		public void setGenre(String genre) {
 			this.genre = genre;
 		}
@@ -43,7 +48,7 @@ public class Genre {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + ((genre == null) ? 0 : genre.hashCode());
-			result = prime * result + ((id == null) ? 0 : id.hashCode());
+			result = prime * result + ((genre_id == null) ? 0 : genre_id.hashCode());
 			return result;
 		}
 
@@ -61,17 +66,17 @@ public class Genre {
 					return false;
 			} else if (!genre.equals(other.genre))
 				return false;
-			if (id == null) {
-				if (other.id != null)
+			if (genre_id == null) {
+				if (other.genre_id != null)
 					return false;
-			} else if (!id.equals(other.id))
+			} else if (!genre_id.equals(other.genre_id))
 				return false;
 			return true;
 		}
 
 		@Override
 		public String toString() {
-			return "Genre [id=" + id + ", genre=" + genre + "]";
+			return "Genre [id=" + genre_id + ", genre=" + genre + "]";
 		} 
 		
 		

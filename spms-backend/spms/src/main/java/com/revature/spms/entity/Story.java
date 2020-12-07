@@ -8,15 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="STORY")
+@Table(name="story_draft")
 public class Story {
 	
 	// fields
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	long id; // points to story pitch
+	long draft_id; // points to story pitch
 	@Column
-	String text; // use this for actual text?
+	String draft_text; // use this for actual text?
 	@Column
 	char is_completed; // Y or N
 	@Column
@@ -28,26 +28,26 @@ public class Story {
 	
 	public Story(long id, String text, char is_completed, char is_approved) {
 		super();
-		this.id = id;
-		this.text = text;
+		this.draft_id = id;
+		this.draft_text = text;
 		this.is_completed = is_completed;
 		this.is_approved = is_approved;
 	}
 
 	public long getId() {
-		return id;
+		return draft_id;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.draft_id = id;
 	}
 
 	public String getText() {
-		return text;
+		return draft_text;
 	}
 
 	public void setText(String text) {
-		this.text = text;
+		this.draft_text = text;
 	}
 
 	public char getIs_completed() {
@@ -70,10 +70,10 @@ public class Story {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (draft_id ^ (draft_id >>> 32));
 		result = prime * result + is_approved;
 		result = prime * result + is_completed;
-		result = prime * result + ((text == null) ? 0 : text.hashCode());
+		result = prime * result + ((draft_text == null) ? 0 : draft_text.hashCode());
 		return result;
 	}
 
@@ -86,23 +86,23 @@ public class Story {
 		if (getClass() != obj.getClass())
 			return false;
 		Story other = (Story) obj;
-		if (id != other.id)
+		if (draft_id != other.draft_id)
 			return false;
 		if (is_approved != other.is_approved)
 			return false;
 		if (is_completed != other.is_completed)
 			return false;
-		if (text == null) {
-			if (other.text != null)
+		if (draft_text == null) {
+			if (other.draft_text != null)
 				return false;
-		} else if (!text.equals(other.text))
+		} else if (!draft_text.equals(other.draft_text))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Story [id=" + id + ", text=" + text + ", is_completed=" + is_completed + ", is_approved=" + is_approved
+		return "Story [id=" + draft_id + ", text=" + draft_text + ", is_completed=" + is_completed + ", is_approved=" + is_approved
 				+ "]";
 	}
 	

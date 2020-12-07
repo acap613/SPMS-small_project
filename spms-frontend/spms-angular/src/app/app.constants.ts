@@ -1,0 +1,1 @@
+export const STORY_PITCH_API_URL = 'http://localhost:8080';

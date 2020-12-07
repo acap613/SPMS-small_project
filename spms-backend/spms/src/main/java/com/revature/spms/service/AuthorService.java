@@ -34,6 +34,7 @@ public class AuthorService {
 			Author existingAuthor = authorRepo.findById(id).get();
 			existingAuthor.setFirst_name(author.getFirst_name());
 			existingAuthor.setLast_name(author.getLast_name());
+			existingAuthor.setCurrent_points(author.getCurrent_points());
 			existingAuthor.setPoints_allowed(author.getPoints_allowed());
 			
 			Author updatedAuthor = authorRepo.save(existingAuthor);
