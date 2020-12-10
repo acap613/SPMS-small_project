@@ -1,11 +1,15 @@
 package com.revature.spms.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.revature.spms.entity.Editor;
 import com.revature.spms.entity.Genre;
+import com.revature.spms.repos.EditorRepo;
 import com.revature.spms.repos.GenreRepo;
 
 @Service
@@ -13,6 +17,8 @@ public class GenreService {
 
 	@Autowired
 	GenreRepo genreRepo;
+	@Autowired
+	EditorRepo editorRepo;
 	
 	public List<Genre> getAllGenres() {
 		// TODO Auto-generated method stub
@@ -45,6 +51,6 @@ public class GenreService {
 
 	public void deleteGenre(Long id) {		
 		this.genreRepo.deleteById(id);
-	}
+	}	
 	
 }

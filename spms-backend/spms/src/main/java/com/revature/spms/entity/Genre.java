@@ -1,13 +1,18 @@
 package com.revature.spms.entity;
 
+import java.util.*;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name="genre")
 public class Genre {
@@ -19,15 +24,22 @@ public class Genre {
 		@Column(name="genre")
 		private String genre;
 		
+		@ManyToMany(mappedBy= "genres", cascade = CascadeType.ALL)
+		@JsonBackReference
+		private Set<Editor> editors = new HashSet<>();	
+	
+
 		public Genre() {
 			
-		}
+		}	
 		
-		public Genre(Long id, String genre) {
+		public Genre(Long genre_id, String genre, Set<Editor> editors) {
 			super();
-			this.genre_id = id;
+			this.genre_id = genre_id;
 			this.genre = genre;
+			this.editors = editors;
 		}
+
 		public Long getId() {
 			return genre_id;
 		}
@@ -36,11 +48,18 @@ public class Genre {
 		}
 		public String getGenre() {
 			return genre;
-		}
-		@ManyToOne
-		@JoinColumn(name="editor_id")
+		}		
+		
 		public void setGenre(String genre) {
 			this.genre = genre;
+		}
+		
+		public Set<Editor> getEditors() {
+			return editors;
+		}
+
+		public void setEditors(Set<Editor> editors) {
+			this.editors = editors;
 		}
 
 		@Override

@@ -1,16 +1,22 @@
 package com.revature.spms.entity;
 
-import java.util.List;
+import java.util.*;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="EDITOR")
@@ -38,24 +44,31 @@ public class Editor {
 	@Column(name="is_general")
 	private char is_general;
 	
-	@Column(name="genres")
-	@OneToMany(targetEntity=Genre.class, mappedBy="genre")
-	public List<Genre> genres;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonManagedReference
+	@JoinTable(
+			name = "editor_genres", 
+			joinColumns = @JoinColumn(name="editor_id"), 
+			inverseJoinColumns = @JoinColumn(name="genre_id")
+	)
+	public Set<Genre> genres = new HashSet<>();;
 	
 	public Editor() {
 		
 	}	
 
-	public Editor(Long id, String first_name, String last_name, int points_allowed, char is_assistant, char is_senior,
-			char is_general) {
+	public Editor(Long editor_id, String first_name, String last_name, int points_allowed, char is_assistant,
+			char is_senior, char is_general, Set<Genre> genres) {
 		super();
-		this.editor_id = id;
+		this.editor_id = editor_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.points_allowed = points_allowed;
 		this.is_assistant = is_assistant;
 		this.is_senior = is_senior;
 		this.is_general = is_general;
+		this.genres = genres;
 	}
 
 	public Long getId() {
@@ -114,12 +127,12 @@ public class Editor {
 		this.is_general = is_general;
 	}	
 	
-	public List<Genre> getGenres() {
+	public Set<Genre> getGenres() {
 		return genres;
 	}
 
 	
-	public void setGenres(List<Genre> genres) {
+	public void setGenres(Set<Genre> genres) {
 		this.genres = genres;
 	}
 

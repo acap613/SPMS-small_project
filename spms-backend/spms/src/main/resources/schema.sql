@@ -1,4 +1,4 @@
-DROP TABLE author;
+/*DROP TABLE author;
 DROP TABLE story_pitch;
 DROP TABLE genre;
 DROP TABLE story_type;
@@ -56,4 +56,4 @@ CREATE TABLE editor (
 	is_general CHAR(1),
 	genres VARCHAR(1000)
 	
-);
+);*/

@@ -34,7 +34,7 @@ public class Author {
 	private int points_allowed;
 	
 	@OneToMany(targetEntity = StoryPitch.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "sp_fk", referencedColumnName = "id")
+	@JoinColumn(name = "author_id", referencedColumnName = "id")
 	private List<StoryPitch> storyPitches;
 	
 	public Author() {

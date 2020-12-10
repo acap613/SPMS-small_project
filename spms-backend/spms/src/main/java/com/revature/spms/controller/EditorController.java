@@ -1,6 +1,7 @@
 package com.revature.spms.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.spms.entity.Editor;
+import com.revature.spms.entity.Genre;
 import com.revature.spms.service.EditorService;
 
 @CrossOrigin(origins="http://localhost:4200")
@@ -40,6 +42,7 @@ public class EditorController {
 	public Editor getEDitorById(@PathVariable long id) {
 		return this.service.getEditorById(id);
 	}
+	
 	// ====================================================
 	
 	// ================= UPDATE ===========================

@@ -1,18 +1,25 @@
 package com.revature.spms.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.spms.entity.Editor;
+import com.revature.spms.entity.Genre;
 import com.revature.spms.repos.EditorRepo;
+import com.revature.spms.repos.GenreRepo;
 
 @Service
 public class EditorService {
 
 	@Autowired
 	EditorRepo editorRepo;	
+	
+	@Autowired
+	GenreService genreService;
 
 	public List<Editor> getAllEditors() {
 		// TODO Auto-generated method stub
@@ -20,8 +27,25 @@ public class EditorService {
 	}
 
 	public Editor addEditor(Editor editor) {
-		// TODO Auto-generated method stub
-		 return this.editorRepo.save(editor);
+//		Editor newEditor = new Editor();
+//		newEditor.setFirst_name(editor.getFirst_name());
+//		newEditor.setLast_name(editor.getLast_name());
+//		newEditor.setPoints_allowed(editor.getPoints_allowed());
+//		newEditor.setIs_assistant(editor.getIs_assistant());
+//		newEditor.setIs_general(editor.getIs_general());
+//		newEditor.setIs_senior(editor.getIs_senior());
+//		newEditor.getGenres()
+//			.addAll(editor
+//					.getGenres()
+//					.stream()
+//					.map(g -> {
+//						Genre gg = genreService.getGenreById(g.getId());
+//						gg.getEditors().add(newEditor);
+//						return gg;
+//					}).collect(Collectors.toSet()));
+			
+		return this.editorRepo.save(editor);
+		
 		
 	}
 
@@ -52,5 +76,7 @@ public class EditorService {
 	public Editor getEditorById(long id) {
 		return this.editorRepo.findById(id).get();
 	}
+
+	
 	
 }
