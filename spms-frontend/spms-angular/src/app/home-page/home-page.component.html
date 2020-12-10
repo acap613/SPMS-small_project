@@ -1,1 +1,18 @@
-<p>home-page works!</p>
+<div class="container" *ngIf="authorLoggedIn">
+    <h3>Welcome, {{authorUsername}}</h3>
+    <div class="container">
+       <hr>click <a routerLink="/list">here</a> to view your story pitches<br>
+        <hr>click <a routerLink="/form">here</a> to submit a new story pitch
+    </div>
+</div>
+
+<div class="container" *ngIf="editorLoggedIn">
+    <h3>Welcome, {{editorUsername}}</h3>
+</div>
+
+<br>
+
+<div class="container">
+    <button class="btn btn-secondary" (click)="switchUserRoles()">Switch</button>
+</div>
+

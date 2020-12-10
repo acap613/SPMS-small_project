@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-story-pitch-form',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoryPitchFormComponent implements OnInit {
 
-  constructor() { }
+  genreForm: FormGroup;
+
+  genres= [
+    {
+      name:'Horror'
+    }, 
+    {
+      name: 'Fantasy'
+    },
+    {
+      name: 'Sci-Fi' 
+    },
+    { 
+      name: 'Romance'
+    } 
+  ]
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.genreForm = this.fb.group({
+      genreControl: ['']
+    });
+  }
+
+  onSubmit(){
+    alert('Submitted')
   }
 
 }

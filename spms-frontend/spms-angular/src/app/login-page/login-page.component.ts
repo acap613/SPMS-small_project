@@ -1,4 +1,7 @@
+import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login-page',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+  password: string;
+  errorMessage = 'Invalid Credentials';
+  loginSuccessMessage = 'Login Successful!';
+  invalidLogin = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  handleLogin(){
+    console.log("Authentication handling needed");
   }
 
 }

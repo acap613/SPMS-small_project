@@ -3,3 +3,12 @@
         <h3>Login Page</h3>
     </div>
 </div>
+
+<div class="container">
+    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+    <div>
+        Input: <input type="text" name = "username">
+        Pasword: <input type="password" name = "password"><hr>
+        <button (click)=handleLogin() class="btn btn-secondary">login</button>
+    </div>
+</div>
