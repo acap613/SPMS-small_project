@@ -46,7 +46,7 @@ public class Editor {
 	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JsonManagedReference
+	//@JsonManagedReference
 	@JoinTable(
 			name = "editor_genres", 
 			joinColumns = @JoinColumn(name="editor_id"), 
@@ -197,11 +197,6 @@ public class Editor {
 				+ ", points_allowed=" + points_allowed + ", is_assistant=" + is_assistant + ", is_senior=" + is_senior
 				+ ", is_general=" + is_general + ", genres=" + genres + "]";
 	}
-
-	
-
-	
-	
 	
 	
 }

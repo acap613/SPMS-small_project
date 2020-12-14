@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StoryPitchService } from '../services/data/story-pitch.service';
 
 export class StoryPitch {
@@ -31,10 +32,11 @@ export class StoryPitch {
 export class StoryPitchesComponent implements OnInit {
 
   pitches: StoryPitch[];
-
+  message: string;
   constructor(
     // data service and router in here
-    private service: StoryPitchService
+    private service: StoryPitchService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class StoryPitchesComponent implements OnInit {
 
   addPitch(){
     console.log('button pressed');
+    this.router.navigate(['form']);
   }
 
 }

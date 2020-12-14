@@ -15,4 +15,6 @@ export class StoryPitchService {
     return this.http.get<StoryPitch[]>(`${STORY_PITCH_API_URL}/story-pitch/get`);
   }
 
+  
+
 }
