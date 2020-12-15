@@ -3,24 +3,18 @@ import { Router } from '@angular/router';
 import { StoryPitchService } from '../services/data/story-pitch.service';
 
 export class StoryPitch {
-  constructor(
-    // tslint:disable-next-line: variable-name
-    public book_id: number,
-    // tslint:disable-next-line: variable-name
+  constructor(    
+    public book_id: number,    
     public author_id: number,
-    public title: string,
-    // tslint:disable-next-line: variable-name
-    public completion_date: Date,
-    // tslint:disable-next-line: variable-name
+    public title: string,    
+    public date: Date,    
     public word_count: number,
     public completed: string,
-    public genre: string,
-    // tslint:disable-next-line: variable-name
+    public genre: string,    
     public tag: string,
     public description: string,
-    public approved: boolean,
-    // tslint:disable-next-line: variable-name
-    public on_hold: boolean
+    public approved: string,    
+    public on_hold: string
   ) {}
 }
 

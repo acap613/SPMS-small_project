@@ -1,45 +1,32 @@
 <h3>Story Pitch Form</h3>
   <hr>  
 <div class="container">
-    <!-- <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Fill form with valid entries before saving!</div> -->
-<!--     
-    <form >
-        <fieldset class="form-group">
-            <label>Story Title</label>
-            <input type="text">
-        </fieldset>     
-        
-        <fieldset class="form-group">
-            <label>Target Date</label>
-            <input type="date">
-        </fieldset>
-
-        <fieldset class="form-group">
-            <label>Genre</label>
-            <input type="text">
-        </fieldset> 
-        <div class="alert alert-success">Form ready to save!</div>
-        <button type="submit" class="btn btn-success">Save</button>
-    </form>   -->
-    <form>
+    <!-- -->
+    <form (ngSubmit)="!storyPitchForm.invalid && saveStoryPitchForm()" #storyPitchForm="ngForm">
         <div class="form-group row">
             <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputTitle" placeholder="Title">
+                <input type="text" #title="ngModel"
+                    [(ngModel)]="pitch.title" name="title" 
+                    class="form-control" 
+                    id="inputTitle" placeholder="Title">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputDate" class="col-sm-2 col-form-label">Est. Finish Date</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" id="inputDate" placeholder="(Approximate Completion Date)">
+                <input type="date" #date="ngModel"
+                    [ngModel]="pitch.date | date: 'yyyy-MM-dd' " 
+                    (ngModelChange)="pitch.date = $event"  
+                    name="date" class="form-control" 
+                    id="inputDate" placeholder="(Approximate Completion Date)">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputWordCount" class="col-sm-2 col-form-label">Word Count</label>
             <div class="col-sm-10">
-                <form [formGroup]="wordCountForm" (ngSubmit)="onSubmit" (change)="selectPointsByWordCount($event)">
-                    <select class="form-control" id="inputDate" formControlName="wordCountControl">
-                        
+                <form [formGroup]="wordCountForm" (change)="selectPointsByWordCount($event)">
+                    <select class="form-control" id="inputDate" formControlName="wordCountControl">                        
                         <option *ngFor="let words of wordCount" [value]="words.pointValue">{{words.noWords}}</option>
                     </select>
                 </form>
@@ -55,10 +42,11 @@
         <div class="form-group row">
             <label for="inputGenre" class="col-sm-2 col-form-label">Genre</label>
             <div class="col-sm-10">
-                <form [formGroup]="genreForm" (ngSubmit)="onSubmit">
-                    <select class="form-control" formControlName="genreControl">
+                <!-- -->
+                <form [formGroup]="genreForm"  (change)="selectGenre($event)">
+                    <select class="form-control" formControlName="genreSelected">
                         <option>--Select Genre--</option>
-                        <option *ngFor="let genre of genres">{{genre.name}}</option>
+                        <option *ngFor="let genre of genres" [value]="genre.name">{{genre.name}}</option>
                     </select>
                     
                 </form>              
@@ -73,20 +61,26 @@
         <div class="form-group row">
             <label for="inputDescription" class="col-sm-2 col-form-label">Story Description</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputDescription" placeholder="Write a short description here">
+                <input type="text" #description="ngModel"
+                    [(ngModel)]="pitch.description"
+                    name="description"
+                    class="form-control" 
+                    id="inputDescription" 
+                    placeholder="Write a short description here">
             </div>
         </div>
       
-        <!-- <div class="form-group row">
+      
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </div>
+        </div>
+          <!-- <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
                 <label class="form-check-label"><input type="checkbox"> Remember me</label>
             </div>
         </div> -->
-        <div class="form-group row">
-            <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-secondary" (click)="onSubmit()">Submit</button>
-            </div>
-        </div>
         <!-- <div class="form-group row">
             <label for="inputGenre" class="col-sm-2 col-form-label">Genre</label>
             <div class="col-sm-10">
@@ -107,7 +101,27 @@
                     <option value="cookbook">Cookbook</option>
                 </select>
             </div>
-        </div> -->
+        </div> --> 
     </form>
+               <!-- <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Fill form with valid entries before saving!</div> -->
+<!--     
+    <form >
+        <fieldset class="form-group">
+            <label>Story Title</label>
+            <input type="text">
+        </fieldset>     
+        
+        <fieldset class="form-group">
+            <label>Target Date</label>
+            <input type="date">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Genre</label>
+            <input type="text">
+        </fieldset> 
+        <div class="alert alert-success">Form ready to save!</div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>   -->
     
 </div>

@@ -11,7 +11,19 @@ import { StoryPitch } from '../story-pitches/story-pitches.component';
 })
 export class StoryPitchFormComponent implements OnInit {
 
-  id: number;
+  book_id: number;
+  author_id: number;
+  title: string;
+  date: Date;
+  words: number;
+  points: number;
+  genre: string;
+  tag: string;
+  desc: string;
+  completed: string;
+  approved: string;
+  on_hold: string;
+
   pitch: StoryPitch;
 
   genreForm: FormGroup;
@@ -19,6 +31,7 @@ export class StoryPitchFormComponent implements OnInit {
 
   message = 'Select';
   pointValueSelected = 'No word count selected';
+  genreSelected = new FormControl();
 
   wordCount = [
     { noWords: '--Select Word Count (approx.)---', pointValue: 'please select a valid word count' },
@@ -52,9 +65,14 @@ export class StoryPitchFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.pitch = new StoryPitch(this.book_id, this.author_id, this.title , new Date(), this.words, this.completed, this.genre, '', '',this.approved, this.on_hold);
     this.genreForm = this.fb.group({
-      genreControl: ['']
+      genreSelected: [''],
+      genre:['']
     });
+    // this.genreForm = new FormGroup({
+    //   genreControl: new FormControl()
+    // });
     this.wordCountForm = this.fb.group({
       wordCountControl: ['']
     });
@@ -62,18 +80,26 @@ export class StoryPitchFormComponent implements OnInit {
     // 
   }
 
-  onSubmit(){
-    alert('Submitted');
+  saveStoryPitchForm() {
+    console.log("submitting...")
+    console.log(this.genre)
     this.service.createPitch(this.pitch).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['form']);
+        this.router.navigate(['list']);
       }
     )
   }
 
   selectPointsByWordCount(event: any) {
     this.pointValueSelected = event.target.value;
+  }
+
+  selectGenre(event: any){
+   
+    this.genre = event.target.value;
+    
+    console.log(this.genre);
   }
 
 }
