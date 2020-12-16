@@ -1,6 +1,7 @@
 import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -13,16 +14,28 @@ export class LoginPageComponent implements OnInit {
   username: string;
   password: string;
   errorMessage = 'Invalid Credentials';
-  loginSuccessMessage = 'Login Successful!';
+  loginSuccessMessage: string;
   invalidLogin = false;
+  loginSuccess = false;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
-  handleLogin(){
-    console.log("Authentication handling needed");
+  handleLogin() {
+    this.authService.authenticationService(this.username, this.password).subscribe((result)=> {
+      this.invalidLogin = false;
+      this.loginSuccess = true;
+      this.loginSuccessMessage = 'Login Successful.';
+      this.router.navigate(['/home']);
+    }, () => {
+      this.invalidLogin = true;
+      this.loginSuccess = false;
+    });      
   }
 
 }

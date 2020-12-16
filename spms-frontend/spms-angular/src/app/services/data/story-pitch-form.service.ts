@@ -15,17 +15,19 @@ export class StoryPitchFormService {
     // console.log('Execute Hello World Bean Service');
   }
 
-  deletePitch(username, id){
-    return this.http.delete(`${STORY_PITCH_API_URL}/author/${username}/pitch/${id}`);
+  deletePitch(id){
+    return this.http.delete(`${STORY_PITCH_API_URL}/story-pitch/delete/${id}`);
   }
 
   retrievePitch(username, id){
     return this.http.get<StoryPitch>(`${STORY_PITCH_API_URL}/author/${username}/pitch/${id}`);
   }
 
-  updatePitch(username, id, pitch){
-    return this.http.put(`${STORY_PITCH_API_URL}/author/${username}/pitch/${id}`, pitch);
+  updatePitch(author_id, book_id, pitch){
+    return this.http.put(`${STORY_PITCH_API_URL}/author/${author_id}/edit/${book_id}`, pitch);
   }
+
+ 
 
   createPitch(pitch){
     return this.http.post(`${STORY_PITCH_API_URL}/story-pitch/add`, pitch);

@@ -42,13 +42,23 @@ public class StoryPitchController {
 		return this.service.addStoryPitch(storyPitch);
 	}
 	
-	// update
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT)	
+	// update Author update
+	@RequestMapping(value = "author/{username}/edit/{id}", method = RequestMethod.PUT)	
 	@ResponseBody
-	public StoryPitch editStoryPitch(@RequestBody StoryPitch storyPitch, @PathVariable long id) {
+	public StoryPitch editStoryPitch(@RequestBody StoryPitch storyPitch,@PathVariable String username, @PathVariable long id) {
 		
-		return this.service.editStoryPitch(storyPitch, id);
+		return this.service.editStoryPitch(storyPitch, username, id);
 	}
+	
+	// update Editor update
+	// update
+		@RequestMapping(value = "editor/edit/{id}", method = RequestMethod.PUT)	
+		@ResponseBody
+		public StoryPitch editStoryPitch(@RequestBody StoryPitch storyPitch, @PathVariable long id) {
+			
+			return this.service.editStoryPitch(storyPitch, id);
+		}
+	
 	// delete
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)	
 	@ResponseBody

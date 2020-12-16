@@ -1,14 +1,22 @@
-<div class="container">
+<div class="container" id="top-header">
     <div class="row">
-        <h3>Login Page</h3>
+        <h3>Welcome to the Story Pitch Management System</h3>
+        
+    </div>  
+</div><hr>
+<div class="container" id="sub-header">
+    <div class="row">
+        
+        <h4>Please login as either an Author or Editor to continue</h4>
     </div>
-</div>
+</div><hr>
 
 <div class="container">
     <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+    <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
     <div>
-        Input: <input type="text" name = "username">
-        Pasword: <input type="password" name = "password"><hr>
+        Username: <input type="text" name = "username" placeholder="username" [(ngModel)]="username">
+        Password: <input type="password" name = "password" placeholder="password"  [(ngModel)]="password"><hr>
         <button (click)=handleLogin() class="btn btn-secondary">login</button>
     </div>
 </div>

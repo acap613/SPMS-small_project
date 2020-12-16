@@ -1,7 +1,7 @@
 <h3>Story Pitch Form</h3>
   <hr>  
 <div class="container">
-    <!-- -->
+  
     <form (ngSubmit)="!storyPitchForm.invalid && saveStoryPitchForm()" #storyPitchForm="ngForm">
         <div class="form-group row">
             <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
@@ -16,21 +16,18 @@
             <label for="inputDate" class="col-sm-2 col-form-label">Est. Finish Date</label>
             <div class="col-sm-10">
                 <input type="date" #date="ngModel"
-                    [ngModel]="pitch.date | date: 'yyyy-MM-dd' " 
-                    (ngModelChange)="pitch.date = $event"  
+                    [ngModel]="pitch.completion_date | date: 'yyyy-MM-dd' " 
+                    (ngModelChange)="pitch.completion_date = $event"  
                     name="date" class="form-control" 
-                    id="inputDate" placeholder="(Approximate Completion Date)">
+                    (change)="selectDate($event)">
             </div>
         </div>
         <div class="form-group row">
             <label for="inputWordCount" class="col-sm-2 col-form-label">Word Count</label>
-            <div class="col-sm-10">
-                <form [formGroup]="wordCountForm" (change)="selectPointsByWordCount($event)">
-                    <select class="form-control" id="inputDate" formControlName="wordCountControl">                        
-                        <option *ngFor="let words of wordCount" [value]="words.pointValue">{{words.noWords}}</option>
-                    </select>
-                </form>
-               
+            <div class="col-sm-10">                
+                <select class="form-control" id="inputDate">                        
+                    <option *ngFor="let words of wordCount" [value]="words.pointValue">{{words.noWords}}</option>             
+               </select>
             </div>
         </div>
         <div class="form-group row">
@@ -41,21 +38,20 @@
         </div>
         <div class="form-group row">
             <label for="inputGenre" class="col-sm-2 col-form-label">Genre</label>
-            <div class="col-sm-10">
-                <!-- -->
-                <form [formGroup]="genreForm"  (change)="selectGenre($event)">
-                    <select class="form-control" formControlName="genreSelected">
-                        <option>--Select Genre--</option>
-                        <option *ngFor="let genre of genres" [value]="genre.name">{{genre.name}}</option>
-                    </select>
-                    
-                </form>              
+            <div class="col-sm-10">                   
+                <select class="form-control" [(ngModel)]="pitch.genre" name="genre" (change)="selectGenre($event)">
+                    <option>--Select Genre--</option>
+                    <option *ngFor="let genre of genres" [value]="genre.name">{{genre.name}}</option>
+                </select>       
             </div>
         </div>
         <div class="form-group row">
             <label for="inputTag" class="col-sm-2 col-form-label">Story Tag</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputTag" placeholder="Enter tags, multiple choice maybe?">
+                <input type="text" #tag="ngModel"
+                       [(ngModel)]="pitch.tag" name="tag"
+                       class="form-control" id="inputTag" 
+                       placeholder="Enter tags, multiple choice maybe?">
             </div>
         </div>
         <div class="form-group row">
@@ -76,52 +72,70 @@
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </div>
         </div>
-          <!-- <div class="form-group row">
-            <div class="col-sm-10 offset-sm-2">
-                <label class="form-check-label"><input type="checkbox"> Remember me</label>
-            </div>
-        </div> -->
-        <!-- <div class="form-group row">
-            <label for="inputGenre" class="col-sm-2 col-form-label">Genre</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="inputGenre">
-                    <option value="">--Select Genre--</option>
-                    <option value="autobiography">Autobiography</option>
-                    <option value="biography">Biography</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="sci-fi">Science Fiction</option>
-                    <option value="horror">Horror</option>
-                    <option value="mystery">Mystery</option>
-                    <option value="literaryFiction">Literary Fiction/Drama</option>
-                    <option value="romance">Romance</option>
-                    <option value="graphicNovel">Comic/Manga/Graphic Novel</option>
-                    <option value="adventure">Action/Adventure</option>
-                    <option value="history">History</option>
-                    <option value="poetry">Poetry</option>
-                    <option value="cookbook">Cookbook</option>
-                </select>
-            </div>
-        </div> --> 
+         
     </form>
-               <!-- <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Fill form with valid entries before saving!</div> -->
-<!--     
-    <form >
-        <fieldset class="form-group">
-            <label>Story Title</label>
-            <input type="text">
-        </fieldset>     
-        
-        <fieldset class="form-group">
-            <label>Target Date</label>
-            <input type="date">
-        </fieldset>
 
-        <fieldset class="form-group">
-            <label>Genre</label>
-            <input type="text">
-        </fieldset> 
-        <div class="alert alert-success">Form ready to save!</div>
-        <button type="submit" class="btn btn-success">Save</button>
-    </form>   -->
-    
+      <!--  <form [formGroup]="storyPitchForm" (ngSubmit)="saveStoryPitchForm()">
+        <div class="form-group row">
+            <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" formControlName="titleControl"
+                    class="form-control" 
+                    id="inputTitle" placeholder="Title"
+                    >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputDate" class="col-sm-2 col-form-label">Est. Finish Date</label>
+            <div class="col-sm-10">
+                <input type="date" formControlName="dateControl" class="form-control" 
+                    id="inputDate" placeholder="(Approximate Completion Date)">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputWordCount" class="col-sm-2 col-form-label">Word Count</label>
+            <div class="col-sm-10">                 
+                <select class="form-control" id="inputDate" formControlName="wordCountControl" (change)="selectPointsByWordCount($event)">                        
+                    <option *ngFor="let words of wordCount" [value]="words.pointValue">{{words.noWords}}</option>
+                </select>  
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="pointsValue" class="col-sm-2 col-form-label">Points Used</label>
+            <div class="col-sm-10">
+                <p class="form-control" id="pointsValue"> {{ pointValueSelected }}</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputGenre" class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-10">               
+                <select class="form-control" formControlName="genreControl" (change)="selectGenre($event)">
+                    <option>--Select Genre--</option>
+                    <option *ngFor="let genre of genres" [value]="genre.name">{{genre.name}}</option>
+                </select>                    
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputTag" class="col-sm-2 col-form-label">Story Tag</label>
+            <div class="col-sm-10">
+                <input type="text" formControlName="tagControl" class="form-control" id="inputTag" placeholder="Enter tags, multiple choice maybe?">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputDescription" class="col-sm-2 col-form-label">Story Description</label>
+            <div class="col-sm-10">
+                <input type="text" 
+                    formControlName="descControl"
+                    class="form-control" 
+                    id="inputDescription" 
+                    placeholder="Write a short description here">
+            </div>
+        </div>      
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </div>
+        </div>
+         
+    </form> -->
 </div>

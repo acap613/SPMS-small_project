@@ -7,7 +7,7 @@ export class StoryPitch {
     public book_id: number,    
     public author_id: number,
     public title: string,    
-    public date: Date,    
+    public completion_date: Date,    
     public word_count: number,
     public completed: string,
     public genre: string,    
@@ -50,5 +50,22 @@ export class StoryPitchesComponent implements OnInit {
     console.log('button pressed');
     this.router.navigate(['form']);
   }
+  
+  deletePitch(id){
+    console.log(`delete button pressed...Story-pitch with ID ${id} removed`);
+    this.service.deletePitch( id).subscribe(
+      response => {
+        console.log(response);
+        this.message = `Story Pitch with ID# ${id} deleted!`;
+        this.refreshPitches();
+      }
+    );
+  }
+
+  updatePitch(id){
+     console.log(`update button pressed...Story Pitch with ID ${id} updated`);
+     this.router.navigate(['form', id]);
+  }
+
 
 }

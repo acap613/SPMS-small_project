@@ -30,6 +30,27 @@ public class StoryPitchService {
 	}
 	
 	// update (important for editors and authors alike)	
+	public StoryPitch editStoryPitch(StoryPitch storyPitch, String username, Long id) {
+		if(spRepo.findById(id).isPresent()) {
+			StoryPitch sp = spRepo.findById(id).get();
+			sp.setAuthor_id(storyPitch.getAuthor_id());
+			sp.setTitle(storyPitch.getTitle());
+			sp.setWord_count(storyPitch.getWord_count());
+			sp.setCompletion_date(storyPitch.getCompletion_date());
+			sp.setTag(storyPitch.getTag());
+			sp.setGenre(storyPitch.getGenre());
+			sp.setDescription(storyPitch.getDescription());
+			sp.setApproved(storyPitch.getApproved());
+			sp.setOn_hold(storyPitch.getOn_hold());
+			
+			StoryPitch updatedStoryPitch = spRepo.save(sp);
+			
+			return  updatedStoryPitch;
+		} else {
+			return this.spRepo.save(storyPitch);
+		}		
+	}
+	
 	public StoryPitch editStoryPitch(StoryPitch storyPitch, Long id) {
 		if(spRepo.findById(id).isPresent()) {
 			StoryPitch sp = spRepo.findById(id).get();

@@ -14,8 +14,8 @@ export class StoryPitchFormComponent implements OnInit {
   book_id: number;
   author_id: number;
   title: string;
-  date: Date;
-  words: number;
+  completion_date: Date;
+  word_count: number;
   points: number;
   genre: string;
   tag: string;
@@ -26,12 +26,13 @@ export class StoryPitchFormComponent implements OnInit {
 
   pitch: StoryPitch;
 
-  genreForm: FormGroup;
-  wordCountForm: FormGroup;
+  // genreForm: FormGroup;
+  // wordCountForm: FormGroup;
+  // storyPitchForm: FormGroup;
 
   message = 'Select';
   pointValueSelected = 'No word count selected';
-  genreSelected = new FormControl();
+  // genreSelected = new FormControl();
 
   wordCount = [
     { noWords: '--Select Word Count (approx.)---', pointValue: 'please select a valid word count' },
@@ -65,31 +66,45 @@ export class StoryPitchFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pitch = new StoryPitch(this.book_id, this.author_id, this.title , new Date(), this.words, this.completed, this.genre, '', '',this.approved, this.on_hold);
-    this.genreForm = this.fb.group({
-      genreSelected: [''],
-      genre:['']
-    });
+    
+    // this.storyPitchForm = this.fb.group({     
+    //   titleControl: [''],
+    //   dateControl: [''],
+    //   wordCountControl: [''],
+    //   points: [''],
+    //   genreControl: [''],
+    //   tagControl: [''],
+    //   descControl: ['']
+    
+    // })
+
+    this.pitch = new StoryPitch(this.book_id, this.author_id, this.title , new Date(), this.word_count, this.completed, this.genre, this.tag, this.desc,'N', 'N');
+    // this.genreForm = this.fb.group({
+    //   genreSelected: [''],
+    //   genre:['']
+    // });
     // this.genreForm = new FormGroup({
     //   genreControl: new FormControl()
     // });
-    this.wordCountForm = this.fb.group({
-      wordCountControl: ['']
-    });
+    // this.wordCountForm = this.fb.group({
+    //   wordCountControl: ['']
+    // });
     
     // 
   }
 
   saveStoryPitchForm() {
-    console.log("submitting...")
-    console.log(this.genre)
-    this.service.createPitch(this.pitch).subscribe(
-      data => {
-        console.log(data);
-        this.router.navigate(['list']);
-      }
-    )
-  }
+   if(this.book_id == -1){
+      this.service.createPitch(this.pitch).subscribe(
+        data => {
+          console.log(data);
+          this.router.navigate(['list']);
+        }
+      );
+    } else {
+      this.service.updatePitch(this.author_id, this.book_id, this.pitch)
+    }   
+  } 
 
   selectPointsByWordCount(event: any) {
     this.pointValueSelected = event.target.value;
@@ -100,6 +115,11 @@ export class StoryPitchFormComponent implements OnInit {
     this.genre = event.target.value;
     
     console.log(this.genre);
+  }
+
+  selectDate(event) {
+    this.completion_date = event.target.value;
+    console.log(this.completion_date)
   }
 
 }
