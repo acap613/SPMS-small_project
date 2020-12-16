@@ -42,10 +42,10 @@ export class AuthenticationService {
     if(user === null){
       console.log('User is NOT logged in')
       return false;
-    } 
+    } else {
       console.log('User IS logged in')
-
       return true;
+    }
     
   }
 

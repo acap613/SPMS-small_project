@@ -12,7 +12,7 @@ export class StoryPitchFormService {
 
   retrieveAllPitches(username){
     return this.http.get<StoryPitch[]>(`${STORY_PITCH_API_URL}/author/${username}/pitch`);
-    // console.log('Execute Hello World Bean Service');
+    
   }
 
   deletePitch(id){

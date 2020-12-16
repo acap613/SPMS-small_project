@@ -13,6 +13,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { StoryPitchFormComponent } from './story-pitch-form/story-pitch-form.component';
 import { StoryPitchesComponent } from './story-pitches/story-pitches.component';
 import { HttpInterceptorService } from './services/http-interceptor.service';
+import { AuthorCreationComponent } from './author-creation/author-creation.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     HomePageComponent,
     StoryPitchFormComponent,
     StoryPitchesComponent,
+    AuthorCreationComponent,
 
   ],
   imports: [
