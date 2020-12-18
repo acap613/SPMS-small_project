@@ -23,10 +23,10 @@ export class StoryPitchService {
     return this.http.put(`${STORY_PITCH_API_URL}/editor/edit/${id}`, pitch);
   }
 
-  createAuthenticationHttpHeader(){
-    let username = 'user';
-    let password = 'password';
-    let authenticationHeader = 'Basic ' + window.btoa(username + ':' + password);
-    return authenticationHeader;
-  }
+  // createAuthenticationHttpHeader(){
+  //   let username = 'user';
+  //   let password = 'password';
+  //   let authenticationHeader = 'Basic ' + window.btoa(username + ':' + password);
+  //   return authenticationHeader;
+  // }
 }

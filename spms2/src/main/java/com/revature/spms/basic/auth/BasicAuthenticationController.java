@@ -1,4 +1,4 @@
-package com.revature.spms.config;
+package com.revature.spms.basic.auth;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BasicAuthenticationController {
 	
 	
-	@GetMapping(path="/basic-auth")
+	@GetMapping(path="/basicauth")
 	public AuthenticationBean helloWorldBean() {
 		//throw new RuntimeException("Unknown Error Occured: please try again later.");
 		return new AuthenticationBean("You are now Authenticated");

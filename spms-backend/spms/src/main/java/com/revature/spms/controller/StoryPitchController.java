@@ -35,10 +35,9 @@ public class StoryPitchController {
 	}	
 	
 	// create new
-	@RequestMapping(value = "/add", method = RequestMethod.POST)	
-	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)		
 	public StoryPitch createNewPitch(@RequestBody StoryPitch storyPitch) {
-		
+		System.out.println("created story pitch called");
 		return this.service.addStoryPitch(storyPitch);
 	}
 	

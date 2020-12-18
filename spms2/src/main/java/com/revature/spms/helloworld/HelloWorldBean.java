@@ -1,10 +1,10 @@
-package com.revature.spms.config;
+package com.revature.spms.helloworld;
 
-public class AuthenticationBean {
+public class HelloWorldBean {
 
 	private String message;
 	
-	public AuthenticationBean(String message) {
+	public HelloWorldBean(String message) {
 		this.message = message;
 	}
 

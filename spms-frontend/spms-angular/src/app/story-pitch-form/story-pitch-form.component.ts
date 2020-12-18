@@ -94,16 +94,28 @@ export class StoryPitchFormComponent implements OnInit {
   }
 
   saveStoryPitchForm() {
-   if(this.book_id == -1){
-      this.service.createPitch(this.pitch).subscribe(
-        data => {
-          console.log(data);
-          this.router.navigate(['list']);
-        }
-      );
-    } else {
-      this.service.updatePitch(this.author_id, this.book_id, this.pitch)
-    }   
+    console.log("submit button pressed");
+    console.log("Starting new form...")
+    this.service.createPitch(this.pitch).subscribe(
+      data => {
+        console.log(data);
+        this.router.navigate(['list']);
+      }
+    );
+  //  if(this.book_id == -1){
+  //     console.log("Starting new form...")
+  //     this.service.createPitch(this.pitch).subscribe(
+  //       data => {
+  //         console.log(data);
+  //         this.router.navigate(['list']);
+  //       }
+  //     );
+  //   } else {
+  //     console.log("something else is happening...")
+  //     this.service.updatePitch(this.author_id, this.book_id, this.pitch)
+  //   }  
+    
+  //   console.log("it didnt work")
   } 
 
   selectPointsByWordCount(event: any) {

@@ -15,8 +15,34 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
+  // authenticationService(username, password) {
+
+  //   return this.http.post<any>(`${STORY_PITCH_API_URL}/api/v1/basic-auth`, {
+  //     username,
+  //     password
+  //   }).pipe(
+  //     map(
+  //       data => {
+  //         sessionStorage.setItem(AUTH_USER, username);
+  //         sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
+
+  //         return data;
+  //       }
+  //     )
+  //   );
+  //   // console.log('Execute Hello World Bean Service');
+  // }
+  authenticate(username, password){
+    if(this.username === 'user' && password === 'password'){
+      sessionStorage.setItem('authenticatedUser', username);
+      return true;
+    }
+    return false;
+  }
+
+
   authenticationService(username, password){
-    return this.http.get(`${STORY_PITCH_API_URL}/api/v1/basic-auth`,
+    return this.http.get(`${STORY_PITCH_API_URL}/api/v1/basicauth`,
      { headers: {authorization: this.createToken(username, password) } }).pipe(
       map(
         data => {
@@ -37,17 +63,17 @@ export class AuthenticationService {
     sessionStorage.setItem(AUTH_USER, username)
   }
   
-  isUserLoggedIn(){
-    let user = sessionStorage.getItem(AUTH_USER);
-    if(user === null){
-      console.log('User is NOT logged in')
-      return false;
-    } else {
-      console.log('User IS logged in')
-      return true;
-    }
+  // isUserLoggedIn(){
+  //   const user = sessionStorage.getItem(AUTH_USER);
+  //   if(user === null){
+  //     console.log('User is NOT logged in')
+  //     return false;
+  //   } else {
+  //     console.log('User IS logged in')
+  //     return true;
+  //   }
     
-  }
+  // }
 
   getUserName(){
     let user = sessionStorage.getItem(AUTH_USER);
@@ -58,10 +84,33 @@ export class AuthenticationService {
     }
   }
 
+  // logout() {
+  //   sessionStorage.removeItem(AUTH_USER);
+  //   this.username=null;
+  //   this.password=null;
+  // }
+
+  
+  getAuthenticatedUser() {
+    return sessionStorage.getItem(AUTH_USER);
+  }
+
+  getAuthenticatedToken() {
+    if (this.getAuthenticatedUser()) {
+      return sessionStorage.getItem(TOKEN);
+    }
+
+  }
+
+
+  isUserLoggedIn() {
+    const user = sessionStorage.getItem(AUTH_USER);
+    return !(user === null);
+  }
+
   logout() {
     sessionStorage.removeItem(AUTH_USER);
-    this.username=null;
-    this.password=null;
+    sessionStorage.removeItem(TOKEN);
   }
 }
 

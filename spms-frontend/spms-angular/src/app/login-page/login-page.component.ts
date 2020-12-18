@@ -27,14 +27,42 @@ export class LoginPageComponent implements OnInit {
   }
 
   handleLogin() {
-    this.authService.authenticationService(this.username, this.password).subscribe((result)=> {
-      this.invalidLogin = false;
-      this.loginSuccess = true;
-      this.loginSuccessMessage = 'Login Successful.';
-      this.router.navigate(['/home']);
-    }, () => {
-      this.invalidLogin = true;
-      this.loginSuccess = false;
+    this.authService.authenticationService(this.username, this.password)
+      .subscribe( 
+        data => {
+          console.log(data);
+          this.invalidLogin = false;
+          this.loginSuccess = true;
+          this.loginSuccessMessage = 'Login Successful.';
+          this.router.navigate(['/home']);
+        }, 
+    //() => {
+      //this.invalidLogin = true;
+      //this.loginSuccess = false;
+      error =>{
+        console.log(error);
+        this.invalidLogin = true;
+
+    });      
+  }
+
+  handleAuthLogin() {
+    this.authService.authenticationService(this.username, this.password)
+      .subscribe( 
+        data => {
+          console.log(data);
+          this.invalidLogin = false;
+          this.loginSuccess = true;
+          this.loginSuccessMessage = 'Login Successful.';
+          this.router.navigate(['/home']);
+        }, 
+    //() => {
+      //this.invalidLogin = true;
+      //this.loginSuccess = false;
+      error =>{
+        console.log(error);
+        this.invalidLogin = true;
+
     });      
   }
 

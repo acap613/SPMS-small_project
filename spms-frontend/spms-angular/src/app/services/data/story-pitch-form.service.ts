@@ -25,12 +25,19 @@ export class StoryPitchFormService {
 
   updatePitch(author_id, book_id, pitch){
     return this.http.put(`${STORY_PITCH_API_URL}/author/${author_id}/edit/${book_id}`, pitch);
-  }
-
- 
+  } 
 
   createPitch(pitch){
+    console.log("Creating new pitch...")
     return this.http.post(`${STORY_PITCH_API_URL}/story-pitch/add`, pitch);
   }
+
+  // createHttpHeader(){
+  //   let username = 'user';
+  //   let password = 'password';
+  //   let authHeaderString = 'Basic ' + window.btoa(username + ':' +  password);
+
+  //   return authHeaderString;
+  // }
 
 }

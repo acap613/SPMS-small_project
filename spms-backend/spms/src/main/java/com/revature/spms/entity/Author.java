@@ -33,6 +33,11 @@ public class Author {
 	@Column(name="points_allowed")
 	private int points_allowed;
 	
+	private String username;
+	
+	private String password;	
+	
+
 	@OneToMany(targetEntity = StoryPitch.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "author_id", referencedColumnName = "id")
 	private List<StoryPitch> storyPitches;
@@ -41,14 +46,16 @@ public class Author {
 		
 	}
 
-	public Author(Long id, String first_name, String last_name, int current_points, int points_allowed,
-			List<StoryPitch> storyPitches) {
+	public Author(Long id, String first_name, String last_name, int current_points, int points_allowed, 
+			String username, String password, List<StoryPitch> storyPitches) {
 		super();
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.current_points = current_points;
 		this.points_allowed = points_allowed;
+		this.username= username;
+		this.password = password;
 		this.storyPitches = storyPitches;
 	}
 
@@ -102,11 +109,28 @@ public class Author {
 	public void setPoints_allowed(int points_allowed) {
 		this.points_allowed = points_allowed;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	@Override
 	public String toString() {
 		return "Author [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", current_points="
-				+ current_points + ", points_allowed=" + points_allowed + ", storyPitches=" + storyPitches + "]";
+				+ current_points + ", points_allowed=" + points_allowed + ", username=" + username + ", password="
+				+ password + ", storyPitches=" + storyPitches + "]";
 	}
 
 	@Override
@@ -117,8 +141,10 @@ public class Author {
 		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((last_name == null) ? 0 : last_name.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + points_allowed;
 		result = prime * result + ((storyPitches == null) ? 0 : storyPitches.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -148,6 +174,11 @@ public class Author {
 				return false;
 		} else if (!last_name.equals(other.last_name))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (points_allowed != other.points_allowed)
 			return false;
 		if (storyPitches == null) {
@@ -155,8 +186,16 @@ public class Author {
 				return false;
 		} else if (!storyPitches.equals(other.storyPitches))
 			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
 		return true;
 	}
+
+	
+	
 
 	
 	

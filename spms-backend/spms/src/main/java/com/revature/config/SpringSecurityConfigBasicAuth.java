@@ -1,4 +1,4 @@
-package com.revature.spms.config;
+package com.revature.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
